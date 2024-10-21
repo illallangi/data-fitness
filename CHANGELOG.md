@@ -1,3 +1,9 @@
+## v0.2.1 (2024-10-21)
+
+### Fix
+
+- **migrations**: added initial migration
+
 ## v0.2.0 (2024-10-21)
 
 ### Feat
