@@ -1,6 +1,7 @@
 from datetime import date
 
 import diffsync
+from yarl import URL
 
 from illallangi.data.fitness.models.swim import Swim as ModelSwim
 
@@ -8,12 +9,6 @@ from illallangi.data.fitness.models.swim import Swim as ModelSwim
 class Swim(
     diffsync.DiffSyncModel,
 ):
-    pk: int
-    url: str
-    date: date
-    distance: int
-    laps: float
-
     _modelname = "Swim"
     _identifiers = ("url",)
     _attributes = (
@@ -21,6 +16,14 @@ class Swim(
         "distance",
         "laps",
     )
+
+    pk: int
+
+    url: URL
+
+    date: date
+    distance: int
+    laps: float
 
     @classmethod
     def create(

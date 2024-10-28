@@ -1,4 +1,5 @@
 {% extends "table.html" %}
+{% load static %}
 {% block table %}
     <h2>Swims</h2>
     <table class="table table-hover table-sm">
@@ -10,25 +11,26 @@
             </tr>
         </thead>
         <tbody>
-            {% for o in page.object_list %}
-                <tr role="button" data-href="{{ o.get_absolute_url }}">
+            {% for obj in page.object_list %}
+                <tr role="button"
+                    data-href="{% url 'swim_detail' obj.date.year obj.date.month|stringformat:'02d' obj.date.day|stringformat:'02d' obj.slug %}">
                     <td>
-                        {% if o.date %}
-                            {{ o.date }}
+                        {% if obj.date %}
+                            {{ obj.date }}
                         {% else %}
                             <em>Unknown</em>
                         {% endif %}
                     </td>
                     <td>
-                        {% if o.distance %}
-                            {{ o.distance }}
+                        {% if obj.distance %}
+                            {{ obj.distance }}
                         {% else %}
                             <em>Unknown</em>
                         {% endif %}
                     </td>
                     <td>
-                        {% if o.laps %}
-                            {{ o.laps }}
+                        {% if obj.laps %}
+                            {{ obj.laps }}
                         {% else %}
                             <em>Unknown</em>
                         {% endif %}

@@ -1,6 +1,7 @@
 from typing import ClassVar
 
 import diffsync
+from yarl import URL
 
 from illallangi.data.fitness.diffsyncmodels import Swim
 from illallangi.data.fitness.models import Swim as DjangoSwim
@@ -22,7 +23,7 @@ class FitnessAdapter(diffsync.Adapter):
             self.add(
                 Swim(
                     pk=obj.pk,
-                    url=obj.url,
+                    url=URL(obj.url),
                     date=obj.date,
                     distance=obj.distance,
                     laps=obj.laps,

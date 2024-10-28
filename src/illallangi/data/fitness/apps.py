@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 from django.conf import settings
-from django.db.models.signals import post_migrate
 
+from illallangi.django.data.signals import ready_for_models
 from illallangi.mastodon.adapters import FitnessAdapter as MastodonAdapter
 
 
@@ -10,16 +10,16 @@ def add_model(
 ) -> None:
     from illallangi.django.data.models import Model, Synchronize
 
-    Model.objects.update_or_create(
+    Model.objects.create(
         description="Swimming is a fantastic way to improve overall fitness and well-being.",
         icon="fitness/swims.png",
         model="illallangi.data.fitness.models.swim.Swim",
         plural="Swims",
         singular="Swim",
-        url="swims_html",
+        url="swim_list",
     )
 
-    Synchronize.objects.update_or_create(
+    Synchronize.objects.create(
         callable="illallangi.data.fitness.apps.synchronize",
     )
 
@@ -31,9 +31,8 @@ class MastodonConfig(AppConfig):
     def ready(
         self,
     ) -> None:
-        post_migrate.connect(
+        ready_for_models.connect(
             add_model,
-            sender=self,
         )
 
 
